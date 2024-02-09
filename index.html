@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APIs</title>
+</head>
+<body>
+    <div class="search-bar">
+        <button class="fetch-btn">Search</button>
+        <input class="fetch-bar" type="text">
+    </div>
+    <img src="">
+    <script>
+        const image = document.querySelector('img');
+        const fetchButton = document.querySelector('.fetch-btn');
+        const fetchBar = document.querySelector('.fetch-bar');
+        const APIKey = 'pflvf4NUp3UTXE8pTrTQRtnw70dY3xDT';
+        let searchValue;
+        
+        fetchButton.addEventListener('click', () => {
+            getGIF();
+        })
+
+        async function getGIF () {
+            searchValue = fetchBar.value;
+            const response = await fetch('https://api.giphy.com/v1/gifs/translate?api_key=' + APIKey + '&s=' + searchValue, {
+                        mode:"cors"
+                    });
+            const responseData = await response.json();
+            image.src = responseData.data.images.original.url;
+        }
+    </script>
+</body>
+</html>
